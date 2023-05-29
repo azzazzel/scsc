@@ -1,5 +1,6 @@
 package demo.scsc.external.inventory;
 
+import demo.scsc.api.productcatalog.ProductUpdatedEvent;
 import org.axonframework.config.Configuration;
 
 import javax.swing.*;
@@ -30,20 +31,20 @@ public class InventoryUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(productTable);
 
         JButton updateButton = new JButton("Publish product(s) update");
-//        updateButton.addActionListener(action ->
-//                inventory.forEach(inventoryProduct ->
-//                        configuration.eventGateway().publish(
-//                                new ProductUpdatedEvent(
-//                                        inventoryProduct.id,
-//                                        inventoryProduct.name,
-//                                        inventoryProduct.desc,
-//                                        inventoryProduct.price,
-//                                        inventoryProduct.image,
-//                                        inventoryProduct.onSale
-//                                )
-//                        )
-//                )
-//        );
+        updateButton.addActionListener(action ->
+                inventory.forEach(inventoryProduct ->
+                        configuration.eventGateway().publish(
+                                new ProductUpdatedEvent(
+                                        inventoryProduct.id,
+                                        inventoryProduct.name,
+                                        inventoryProduct.desc,
+                                        inventoryProduct.price,
+                                        inventoryProduct.image,
+                                        inventoryProduct.onSale
+                                )
+                        )
+                )
+        );
 
         mainContainer.add(scrollPane, BorderLayout.CENTER);
         mainContainer.add(updateButton, BorderLayout.SOUTH);
