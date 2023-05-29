@@ -7,7 +7,16 @@
     </q-header>
 
     <q-page-container class="q-pt-xs">
-      <q-card dark bordered class="bg-accent absolute-center">
+      <q-banner v-if="!orderPayment.id" class="bg-secondary text-white">
+        No paymemnt process found for order {{ orderId }}
+      </q-banner>
+
+      <q-card
+        v-if="orderPayment.id"
+        dark
+        bordered
+        class="bg-accent absolute-center"
+      >
         <q-card-section>
           <div class="text-h6">Payments for order</div>
           <div class="text-subtitle2">{{ orderId }}</div>
@@ -50,7 +59,11 @@
           </q-list>
 
           <q-separator dark inset />
-          <q-item v-if="amount >0" class="q-pa-lg q-mt-lg" style="background-color: white">
+          <q-item
+            v-if="amount > 0"
+            class="q-pa-lg q-mt-lg"
+            style="background-color: white"
+          >
             <q-item-section>
               <q-input
                 outline
@@ -130,7 +143,7 @@ export default defineComponent({
           console.log("response: " + response.data.payload);
           orderPayment.value = response.data.payload;
           formatPrices();
-          amount.value = amountDue()
+          amount.value = amountDue();
         })
         .catch((error) => {
           console.error(error);
