@@ -11,6 +11,7 @@
     <modules>
         <module>axon-boot</module>
         <module>external-inventory</module>
+        <module>external-warehouse</module>
         <module>scsc_api</module>
     </modules>
 
