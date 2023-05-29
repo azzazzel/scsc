@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>axon-boot</module>
+        <module>external-inventory</module>
     </modules>
 
     <properties>
