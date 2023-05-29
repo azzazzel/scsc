@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 @ProcessingGroup(Constants.PROCESSING_GROUP_PRODUCT)
 public class ProductsProjection {
 
-    private static final String GET_PRODUCTS_SQL = "SELECT p FROM ProductEntity AS p";
-
     @EventHandler
     public void on(ProductUpdateReceivedEvent productUpdateReceivedEvent) {
         EntityManager em = JpaPersistenceUnit.forName("SCSC").getNewEntityManager();
@@ -69,6 +67,6 @@ public class ProductsProjection {
 
 
     private static String getProductsSql(String sortBy) {
-        return GET_PRODUCTS_SQL + " ORDER BY " + sortBy;
+        return "SELECT p FROM ProductEntity AS p ORDER BY " + sortBy;
     }
 }

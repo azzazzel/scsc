@@ -109,6 +109,15 @@ public class ShippingProjection {
         em.getTransaction().commit();
     }
 
+
+    @MessageHandlerInterceptor(messageType = EventMessage.class)
+    public void intercept(EventMessage<?> message,
+                          InterceptorChain interceptorChain) throws Exception {
+        LOG.info("[    EVENT ] " + message.getPayload().toString());
+        interceptorChain.proceed();
+    }
+
+
     private List<ShippingProductEntity> toEntities(ShipmentRequestedEvent shipmentRequestedEvent) {
         return shipmentRequestedEvent.products().stream()
                 .map(productId -> new ShippingProductEntity(new ShippingProductEntity.Id(
@@ -118,10 +127,4 @@ public class ShippingProjection {
                 .collect(Collectors.toList());
     }
 
-    @MessageHandlerInterceptor(messageType = EventMessage.class)
-    public void intercept(EventMessage<?> message,
-                          InterceptorChain interceptorChain) throws Exception {
-        LOG.info("[    EVENT ] " + message.getPayload().toString());
-        interceptorChain.proceed();
-    }
 }

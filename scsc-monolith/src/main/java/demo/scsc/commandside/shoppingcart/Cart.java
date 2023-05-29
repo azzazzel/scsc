@@ -24,7 +24,7 @@ import static org.axonframework.modelling.command.AggregateLifecycle.*;
 
 public class Cart {
 
-    private static final String ABANDON_CART = "abandon-cart";
+    private static final String DEADLINE_NAME_ABANDON_CART = "abandon-cart";
     private static final Logger LOG = LoggerFactory.getLogger(Cart.class);
 
     @AggregateIdentifier UUID id;
@@ -56,7 +56,7 @@ public class Cart {
         ------------------------- */
 
         apply(new ProductAddedToCartEvent(id, command.productId()));
-        deadlineManager.schedule(Duration.ofMinutes(10), ABANDON_CART);
+        deadlineManager.schedule(Duration.ofMinutes(10), DEADLINE_NAME_ABANDON_CART);
 
         return id;
     }
@@ -114,7 +114,7 @@ public class Cart {
         apply(new CartCheckedOutEvent(command.cartId()));
     }
 
-    @DeadlineHandler(deadlineName = ABANDON_CART)
+    @DeadlineHandler(deadlineName = DEADLINE_NAME_ABANDON_CART)
     public void onDeadline() {
         apply(new CartAbandonedEvent(id, CartAbandonedEvent.Reason.TIMEOUT));
     }
