@@ -69,6 +69,7 @@ export const useCartStore = defineStore('carts', () => {
                 "name": "demo.scsc.api.shoppingcart.RemoveProductFromCartCommand",
                 "payload": {
                     "productId": productId,
+                    // "productId": crypto.randomUUID(),
                     "cartId": cartId,
                 },
                 "payloadType": "demo.scsc.api.shoppingcart.RemoveProductFromCartCommand",
