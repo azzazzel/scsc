@@ -30,7 +30,6 @@ public class ShippingProjection {
 
     @EventHandler
     public void on(ShipmentRequestedEvent shipmentRequestedEvent, QueryUpdateEmitter queryUpdateEmitter) {
-
         EntityManager em = JpaPersistenceUnit.forName("SCSC").getNewEntityManager();
         em.getTransaction().begin();
         toEntities(shipmentRequestedEvent).forEach(entity -> {
@@ -43,7 +42,6 @@ public class ShippingProjection {
         });
         em.getTransaction().commit();
         em.close();
-
     }
 
     @EventHandler

@@ -41,7 +41,9 @@ public class PackageContent {
     @CommandHandler
     public void on(AddProductToPackageCommand addProductToPackageCommand) {
 
-        // validation
+        /* -------------------------
+                validation
+        ------------------------- */
 
         if (!items.containsKey(addProductToPackageCommand.productId())) {
             throw new CommandExecutionException("product not part of this shipment", null);
@@ -51,7 +53,9 @@ public class PackageContent {
             throw new CommandExecutionException("product already added to package", null);
         }
 
-        // applying event(s)
+        /* -------------------------
+                notification
+        ------------------------- */
 
         apply(new ProductAddedToPackageEvent(
                 addProductToPackageCommand.shipmentId(),
