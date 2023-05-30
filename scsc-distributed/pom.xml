@@ -13,6 +13,8 @@
         <module>external-inventory</module>
         <module>external-warehouse</module>
         <module>scsc_api</module>
+        <module>product-catatlog</module>
+        <module>shoppingcart</module>
     </modules>
 
     <properties>
